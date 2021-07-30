@@ -37,7 +37,7 @@ class SubCategoriesController extends Controller
 
     public function destroy($id)
     {
-        SubCategory::find($id)->destroy();
+        SubCategory::destroy($id);
         return \response()->json(['status' => 'error', 'msg' =>'destroyed']);
     }
 }

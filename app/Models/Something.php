@@ -9,7 +9,7 @@ class Something extends Model
 {
     use HasFactory;
 
-    protected $table = "something";
+    protected $table = "somethings";
     protected $fillable = [
         'name',
         'category_id'
@@ -22,6 +22,6 @@ class Something extends Model
 
     public function subCategory()
     {
-        return $this->belongsToMany('something_has_subcategory');
+        return $this->belongsToMany(SubCategory::class, 'something_has_subcategory', 'something_id', 'subcategory_id');
     }
 }

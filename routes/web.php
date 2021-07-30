@@ -7,6 +7,7 @@ Route::get('/something/create', [\App\Http\Controllers\MainController::class, 'c
 Route::post('/something/store', [\App\Http\Controllers\MainController::class, 'store'])->name('something.store');
 Route::get('/something/edit/{id}', [\App\Http\Controllers\MainController::class, 'edit'])->name('something.edit');
 Route::patch('/something/update/{id}', [\App\Http\Controllers\MainController::class, 'update'])->name('something.update');
+Route::delete('/something/destroy/{id}', [\App\Http\Controllers\MainController::class, 'destroy'])->name('something.destroy');
 
 
 Route::get('/category/create', [\App\Http\Controllers\CategoriesController::class, 'create'])->name('category.create');

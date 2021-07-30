@@ -123,7 +123,7 @@
                                         </td>
                                         <td>
                                             <button type="button" data-url="{{route('something.edit', $something->id)}}" class="btn btn-success edit-something">Edit</button>
-                                            <button type="button" data-url="{{route('something.edit', $something->id)}}" class="btn btn-danger destroy-something">Destroy</button>
+                                            <button type="button" data-url="{{route('something.destroy', $something->id)}}" class="btn btn-danger destroy-something">Destroy</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -151,6 +151,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $(function () {
         $('body').on('click', '#add-category', function (){
@@ -165,7 +166,6 @@
         }).on('click', '.store-category', function (){
             let form = $(this).closest('form'),
                 fd = new FormData($(this).closest('form')[0]);
-            fd.append('_token', $('meta[name=_token]').attr('content'));
             $.ajax({
                 url: form.attr('action'),
                 method: 'post',
@@ -189,10 +189,9 @@
         }).on('click', '.update-category', function () {
             let form = $(this).closest('form'),
                 fd = new FormData($(this).closest('form')[0]);
-            fd.append('_token', $('meta[name=_token]').attr('content'));
             $.ajax({
                 url: form.attr('action'),
-                method: 'post',
+                method: 'patch',
                 data: fd,
                 dataType: 'json',
                 contentType: false,
@@ -217,9 +216,9 @@
                     $.ajax({
                         url: self.attr('data-url'),
                         method: 'delete',
-                        data: {_token: $('meta[name=_token]').attr('content')}
+                        data: {_token: $('meta[name=csrf-token]').attr('content')}
                     }).done(() => {
-                        $("#category").load(" #category");
+                        $("#categories").load(" #categories");
                     });
                 }
             })
@@ -235,7 +234,6 @@
         }).on('click', '.store-subCategory', function (){
             let form = $(this).closest('form'),
                 fd = new FormData($(this).closest('form')[0]);
-            fd.append('_token', $('meta[name=_token]').attr('content'));
             $.ajax({
                 url: form.attr('action'),
                 method: 'post',
@@ -259,10 +257,9 @@
         }).on('click', '.update-subCategory', function () {
             let form = $(this).closest('form'),
                 fd = new FormData($(this).closest('form')[0]);
-            fd.append('_token', $('meta[name=_token]').attr('content'));
             $.ajax({
                 url: form.attr('action'),
-                method: 'post',
+                method: 'patch',
                 data: fd,
                 dataType: 'json',
                 contentType: false,
@@ -287,7 +284,7 @@
                     $.ajax({
                         url: self.attr('data-url'),
                         method: 'delete',
-                        data: {_token: $('meta[name=_token]').attr('content')}
+                        data: {_token: $('meta[name=csrf-token]').attr('content')}
                     }).done(() => {
                         $("#subCategory").load(" #subCategory");
                     });
@@ -305,7 +302,6 @@
         }).on('click', '.store-something', function (){
             let form = $(this).closest('form'),
                 fd = new FormData($(this).closest('form')[0]);
-            fd.append('_token', $('meta[name=_token]').attr('content'));
             $.ajax({
                 url: form.attr('action'),
                 method: 'post',
@@ -329,10 +325,9 @@
         }).on('click', '.update-something', function () {
             let form = $(this).closest('form'),
                 fd = new FormData($(this).closest('form')[0]);
-            fd.append('_token', $('meta[name=_token]').attr('content'));
             $.ajax({
                 url: form.attr('action'),
-                method: 'post',
+                method: 'patch',
                 data: fd,
                 dataType: 'json',
                 contentType: false,
@@ -357,7 +352,7 @@
                     $.ajax({
                         url: self.attr('data-url'),
                         method: 'delete',
-                        data: {_token: $('meta[name=_token]').attr('content')}
+                        data: {_token: $('meta[name=csrf-token]').attr('content')}
                     }).done(() => {
                         $("#something").load(" #something");
                     });

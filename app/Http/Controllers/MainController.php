@@ -25,7 +25,8 @@ class MainController extends Controller
     public function store(Request $request, Something $something)
     {
         $something->fill($request->all())->save();
-        $something->subCategory()->attach($request->subcategory_id);
+		$subCategories = SubCategory::find($request->subcategory_id);
+        $something->subCategory()->attach($subCategories);
         return \response()->json(['status' => 'error', 'msg' => $something->name]);
     }
 
@@ -39,13 +40,14 @@ class MainController extends Controller
     {
         $something = Something::find($id);
         $something->fill($request->all())->save();
-        $something->subCategory()->attach($request->subcategory_id);
+		$subCategories = SubCategory::find($request->subcategory_id);
+        $something->subCategory()->sync($subCategories);
         return \response()->json(['status' => 'error', 'msg' => $something->name.'updated']);
     }
 
     public function destroy($id)
     {
-        Something::find($id)->destroy();
+        Something::destroy($id);
         return \response()->json(['status' => 'error', 'msg' =>'destroyed']);
     }
 }

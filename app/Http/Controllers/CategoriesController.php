@@ -38,7 +38,7 @@ class CategoriesController extends Controller
 
     public function destroy($id)
     {
-        Category::find($id)->destroy();
+        Category::destroy($id);
         return \response()->json(['status' => 'error', 'msg' =>'destroyed']);
     }
 }
